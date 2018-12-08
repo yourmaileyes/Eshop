@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zzc.webshop.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.zzc.webshop.entity.Order" >
+    <id column="orderid" property="orderid" jdbcType="CHAR" />
+    <result column="username" property="username" jdbcType="CHAR" />
+    <result column="useraddr" property="useraddr" jdbcType="CHAR" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="CHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    orderid, username, useraddr, price, type, userid, remark
+  </sql>
+  <select id="selectallorder" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from orde
+  </select>
+  <select id="selectorderbyorderid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from orde
+    where orderid = #{orderid,jdbcType=CHAR} 
+  </select>
+  <select id="selectorder" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from orde
+    where userid = #{userid,jdbcType=CHAR} order by orderid desc
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from orde
+    where orderid = #{orderid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from orde
+    where orderid = #{orderid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zzc.webshop.entity.Order" >
+    insert into orde (orderid, username, useraddr, 
+      price, type, userid, remark
+      )
+    values (#{orderid,jdbcType=CHAR}, #{username,jdbcType=CHAR}, #{useraddr,jdbcType=CHAR}, 
+      #{price,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{userid,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzc.webshop.entity.Order" >
+    insert into orde
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        orderid,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="useraddr != null" >
+        useraddr,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        #{orderid,jdbcType=CHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=CHAR},
+      </if>
+      <if test="useraddr != null" >
+        #{useraddr,jdbcType=CHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzc.webshop.entity.Order" >
+    update orde
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=CHAR},
+      </if>
+      <if test="useraddr != null" >
+        useraddr = #{useraddr,jdbcType=CHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where orderid = #{orderid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzc.webshop.entity.Order" >
+    update orde
+    set username = #{username,jdbcType=CHAR},
+      useraddr = #{useraddr,jdbcType=CHAR},
+      price = #{price,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where orderid = #{orderid,jdbcType=CHAR}
+  </update>
+</mapper>

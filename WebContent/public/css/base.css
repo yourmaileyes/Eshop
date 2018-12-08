@@ -1,0 +1,253 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Hiragino Sans GB","Microsoft Yahei",SimSun,Arial,"Helvetica Neue",Helvetica;
+    color: #333;
+    word-wrap: break-word;
+    -webkit-font-smoothing: antialiased
+}
+
+article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary {
+    display: block
+}
+
+progress {
+    display: inline-block;
+    vertical-align: baseline
+}
+
+a {
+    background-color: transparent;
+    outline: 0;
+    text-decoration: none
+}
+
+a:hover {
+    color: #00b38a;
+    text-decoration: underline
+}
+
+h1,h2,h3,h4,h5,h6 {
+    margin: 10px 0;
+    font-weight: 400
+}
+
+h1 {
+    font-size: 24px
+}
+
+h2 {
+    font-size: 20px
+}
+
+h3 {
+    font-size: 18px
+}
+
+h4 {
+    font-size: 16px
+}
+
+h5 {
+    font-size: 14px
+}
+
+h6 {
+    font-size: 12px
+}
+
+p {
+    margin: 0
+}
+
+p+p {
+    margin-top: 10px
+}
+
+img {
+    border: 0;
+    vertical-align: top;
+    display: inline-block
+}
+
+input,optgroup,select,textarea {
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ededed;
+    font-family: inherit
+}
+
+input {
+    font-family: Arial,"Hiragino Sans GB","Microsoft Yahei",SimSun
+}
+
+label,select,input[type=reset],input[type=submit],input[type=radio],input[type=checkbox] {
+    cursor: pointer
+}
+
+input[type=checkbox],input[type=radio] {
+    padding: 0
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+th,td {
+    padding: 0
+}
+
+em,strong {
+    font-weight: 400
+}
+
+i {
+    font-style: normal
+}
+
+dl,dt,dd {
+    margin: 0
+}
+
+::selection {
+    color: #fff;
+    background-color: #00b38a;
+}
+
+::-moz-focus-inner {
+    border: 0
+}
+
+ul {
+    margin: 0;
+    padding: 0
+}
+
+li {
+    list-style: none
+}
+
+.fl {
+    float: left
+}
+
+.fr {
+    float: right
+}
+
+.clearfix {
+    zoom:1; }
+
+.clearfix:before,.clearfix:after {
+    content: "";
+    display: table
+}
+
+.clearfix:after {
+    clear: both
+}
+
+html {
+    font-size: 14px
+}
+
+body {
+    min-width: 1024px;
+    min-height: 100%;
+    background-color: #f0f3ef;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.aui-input {
+    font-size: 14px;
+    position: relative;
+    z-index: 1;
+    height: 44px;
+    line-height: 44px\9;
+    vertical-align: middle;
+    color: #333;
+    border-width: 1px;
+    border-style: solid;
+    outline: 0;
+}
+
+ input, optgroup, select, textarea {
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ededed;
+    font-family: inherit;
+}
+
+input {
+    -webkit-appearance: textfield;
+    background-color: white;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    padding: 1px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: initial;
+    border-image: initial;
+}
+
+input, textarea, select, {
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    margin: 0em;
+    font: 400 11px system-ui;
+}
+
+.aui-btn {
+    font-size: 16px;
+    line-height: 44px;
+    display: inline-block;
+    height: 44px;
+    padding: 0 30px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    outline: 0;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-transition: .05s linear;
+    -o-transition: .05s linear;
+    transition: .05s linear;
+}
+
+.example2 {
+}
+
+.example2 ol {
+    position: relative;
+    width: 110px;
+    height: 20px;
+    top: -55px;
+    left: 30px;
+}
+
+.example2 ol li {
+    float: left;
+    width: 8px;
+    height: 8px;
+    margin: 5px;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.example2 ol li.seleted {
+    background: #fff;
+}

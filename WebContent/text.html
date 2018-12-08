@@ -1,0 +1,185 @@
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+<style type="text/css">
+input.denglu-input {
+	width: 270px;
+	padding: 12px 14px;
+	background-color: #fff;
+	box-shadow: 2px 0 5px 0 #fff;
+	border: 1px solid rgba(84, 92, 99, .6);
+	border-radius: 6px;
+}
+</style>
+</head>
+
+<div id="dengluinput"
+	style="position: fixed; background: rgb(255, 255, 255) none repeat scroll 0% 0%; z-index: 100000; width: 360px; left: 50%; top: 50%; margin: -218px 0px 0px -180px; box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25); display: none;">
+
+	<div
+		style="font-size: 16px; line-height: 49px; height: 49px; color: #787d82; border-bottom: 1px solid #d0d6d9;">
+
+		<span id="denglu" onclick="denglu()"
+			style="border-bottom: 1px solid #f01400; color: #f01400; float: left; width: 80px; text-align: center; height: 49px; line-height: 49px; cursor: pointer; padding: 0 20px;">登录</span>
+
+		<span id="zhuce" onclick="zhuce()"
+			style="border-bottom: 1px solid #d0d6d9; color: #f01400; float: left; width: 80px; text-align: center; height: 49px; line-height: 49px; cursor: pointer; padding: 0 20px;">注册</span>
+
+		<span style="float: right; cursor: pointer; padding-right: 20px"
+			onclick="guanbi()"> X </span>
+
+	</div>
+	<div style="padding: 30px 30px;">
+		<form id="form1" action="login.do" method="post">
+			<label for="username">用户名</label> <input class="denglu-input"
+				id="username" type="text" name="username"><br> <label
+				for="password">密码</label> <input class="denglu-input" id="password"
+				type="password" name="password"><br> <label
+				id="labeladdr" for="addr"></label><br> <label id="labelphone"
+				for="phone"></label><br> <span id="tishi"></span><br>
+		</form>
+		<button id="tijiao" onclick="quickpasswordchat()" type="button"
+			style="color: #fff; margin-top: 20px; border-color: #c20a0a; width: 90%; height: 50px; background: #c20a0a;">登录</button>
+
+	</div>
+
+
+
+
+</div>
+<body>
+	<button onclick="showdenglu()">denglu</button>
+</body>
+<script type="text/javascript" src="public/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+	function showdenglu() {
+		$("#dengluinput").fadeIn();
+	}
+	function guanbi() {
+		$("#dengluinput").fadeOut();
+	}
+	function zhuce() {
+		var addr = document.createElement("input");
+		var phone = document.createElement("input");
+		$("#labeladdr").text("地址");
+		addr.id = "addr";
+		addr.name = "addr";
+		addr.type = "text";
+		$("#labeladdr").after(addr);
+		$("#labelphone").text("手机号码");
+		phone.id = "phone";
+		phone.name = "phone";
+		phone.type = "text";
+		$("#labelphone").after(phone);
+		$("#addr").addClass("denglu-input");
+		$("#phone").addClass("denglu-input");
+		$("#tijiao").html("注册");
+		$("#tijiao").attr("onclick", "quickregist()");
+		$("#zhuce").css("border-bottom", "1px solid #f01400");
+		$("#denglu").css("border-bottom", "1px solid #d0d6d9");
+		$("#zhuce").attr("onclick", "#");
+		$("#denglu").attr("onclick", "denglu()");
+		$("#form1").attr("action", "regist.do");
+	}
+	function denglu() {
+		$("#labeladdr").text("");
+		$("#labelphone").text("");
+		$("#phone").remove();
+		$("#addr").remove();
+		$("#zhuce").css("border-bottom", "1px solid #d0d6d9");
+		$("#denglu").css("border-bottom", "1px solid #f01400");
+		$("#denglu").attr("onclick", "#");
+		$("#zhuce").attr("onclick", "zhuce()");
+		$("#tijiao").html("登录");
+		$("#tijiao").attr("onclick", "quickpasswordchat()");
+		$("#form1").attr("action", "login.do");
+	}
+	function quickpasswordchat() {
+		var username = $("#username").val();
+		var password = $("#password").val();
+		var isok = true;
+		if (username == "" || password == "") {
+			$("#tishi").html(
+					"<b style='color:red;font-size:15px;'>用户名或密码不能为空!</b>");
+			isok = false;
+			return;
+		}
+		$
+				.ajax({
+					type : "post",
+					url : "quickpasswordchat.do",
+					data : {
+						"username" : username,
+						"password" : password
+					},
+					async : false,
+					datatype : "text",
+					success : function(data) {
+						if (data == "0") {
+							$("#tishi")
+									.html(
+											"<b style='color:red;font-size:15px;'>用户名或密码错误!</b>");
+							isok = false;
+						} else {
+							$("#tishi").html("正在登录.....");
+						}
+					},
+					error : function(data) {
+						alert("登录出错！请联系管理员" + data);
+						isok = false;
+					}
+				});
+		if (isok) {
+			$("#form1").submit();
+		}
+	}
+
+	function quickregist() {
+		var username = $("#username").val();
+		var password = $("#password").val();
+		var phone = $("#phone").val();
+		var addr = $("#addr").val();
+		var isok = true;
+		if (username == "" || password == "") {
+			$("#tishi").html(
+					"<b style='color:red;font-size:15px;'>用户名或密码不能为空!</b>");
+			isok = false;
+			return;
+		}
+		if (phone == "" || addr == "") {
+			$("#tishi").html(
+					"<b style='color:red;font-size:15px;'>手机号或地址不能为空!</b>");
+			isok = false;
+			return;
+		}
+		$
+				.ajax({
+					type : "post",
+					url : "quickusernamechat.do",
+					data : {
+						"username" : username
+					},
+					async : false,
+					datatype : "text",
+					success : function(data) {
+						if (data == "1") {
+							$("#tishi")
+									.html(
+											"<b style='color:red;font-size:15px;'>用户名已经存在!</b>");
+							isok = false;
+						} else {
+							$("#tishi").html("正在注册.....");
+						}
+					},
+					error : function(data) {
+						alert("注册出错！请联系管理员" + data);
+						isok = false;
+					}
+				});
+		if (isok) {
+			$("#form1").submit();
+		}
+
+	}
+</script>
+</html>

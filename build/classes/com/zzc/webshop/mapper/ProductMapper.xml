@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zzc.webshop.mapper.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.zzc.webshop.entity.Product" >
+    <id column="productid" property="productid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="CHAR" />
+    <result column="context" property="context" jdbcType="CHAR" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="addr" property="addr" jdbcType="CHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    productid, name, context, price, addr, type
+  </sql>
+   <select id="selectlastproductid" resultType="String">
+    select 
+    productid+1
+    from product order by productid desc limit 1
+  </select>
+  <select id="selectname" resultMap="BaseResultMap" parameterType="String" >
+    select 
+    *
+    from product where name like
+    concat('%',#{0},'%') or addr like concat('%',#{0},'%')
+  </select>
+  <select id="selectall" resultMap="BaseResultMap"  >
+    select 
+    *
+    from product
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where productid = #{productid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product
+    where productid = #{productid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zzc.webshop.entity.Product" >
+    insert into product (productid, name, context, 
+      price, addr, type)
+    values (#{productid,jdbcType=INTEGER}, #{name,jdbcType=CHAR}, #{context,jdbcType=CHAR}, 
+      #{price,jdbcType=INTEGER}, #{addr,jdbcType=CHAR}, #{type,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzc.webshop.entity.Product" >
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productid != null" >
+        productid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="context != null" >
+        context,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="addr != null" >
+        addr,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=CHAR},
+      </if>
+      <if test="context != null" >
+        #{context,jdbcType=CHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="addr != null" >
+        #{addr,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzc.webshop.entity.Product" >
+    update product
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=CHAR},
+      </if>
+      <if test="context != null" >
+        context = #{context,jdbcType=CHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="addr != null" >
+        addr = #{addr,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+    </set>
+    where productid = #{productid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzc.webshop.entity.Product" >
+    update product
+    set name = #{name,jdbcType=CHAR},
+      context = #{context,jdbcType=CHAR},
+      price = #{price,jdbcType=INTEGER},
+      addr = #{addr,jdbcType=CHAR},
+      type = #{type,jdbcType=INTEGER}
+    where productid = #{productid,jdbcType=INTEGER}
+  </update>
+</mapper>

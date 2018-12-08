@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zzc.webshop.mapper.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.zzc.webshop.entity.Message" >
+    <result column="fromid" property="fromid" jdbcType="VARCHAR" />
+    <result column="toid" property="toid" jdbcType="VARCHAR" />
+    <result column="context" property="context" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <select id="selectallmessage"  resultMap="BaseResultMap">
+  select * from message 
+  </select>
+  <select id="selectmessage" parameterType="String" resultMap="BaseResultMap">
+  select * from message where fromid = #{fromid} or toid = #{fromid}
+  </select>
+  <update id="updatereadmessage" parameterType="String">
+  update message
+  set type = 1 where fromid = #{fromid}
+  </update>
+  <insert id="insert" parameterType="com.zzc.webshop.entity.Message" >
+    insert into message (fromid, toid, context, 
+      type,time)
+    values (#{fromid,jdbcType=VARCHAR}, #{toid,jdbcType=VARCHAR}, #{context,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR},now())
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzc.webshop.entity.Message" >
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fromid != null" >
+        fromid,
+      </if>
+      <if test="toid != null" >
+        toid,
+      </if>
+      <if test="context != null" >
+        context,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fromid != null" >
+        #{fromid,jdbcType=VARCHAR},
+      </if>
+      <if test="toid != null" >
+        #{toid,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null" >
+        #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      now(),
+    </trim>
+  </insert>
+</mapper>

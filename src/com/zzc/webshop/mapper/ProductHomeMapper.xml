@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zzc.webshop.mapper.ProductHomeMapper" >
+  <resultMap id="BaseResultMap" type="com.zzc.webshop.entity.ProductHome" >
+    <result column="userid" property="userid" jdbcType="CHAR" />
+    <result column="productid" property="productid" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="productname" property="productname" jdbcType="CHAR" />
+  </resultMap>
+  <select id="selectnumber" resultType="String"  parameterType="String">
+    select sum(number) as geshu from producthome where userid = #{userid}
+  </select>
+  
+  <select id="selectall" resultMap="BaseResultMap"  parameterType="String">
+    select 
+    *
+    from producthome where userid = #{userid}
+  </select>
+  <select id="selectproduct" resultMap="BaseResultMap"  parameterType="Map">
+    select 
+    *
+    from producthome where userid = #{userid} and productid = #{productid}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Map" >
+    delete from producthome
+    where userid = #{userid,jdbcType=CHAR} 
+    <if test="productid != null" >
+    and productid = #{productid,jdbcType=INTEGER}
+      </if>
+  </delete>
+  <insert id="insert" parameterType="com.zzc.webshop.entity.ProductHome" >
+    insert into producthome (userid, productid, number, 
+      price, productname)
+    values (#{userid,jdbcType=CHAR}, #{productid,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{productname,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzc.webshop.entity.ProductHome" >
+    insert into producthome
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="productid != null" >
+        productid,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="productname != null" >
+        productname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=CHAR},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="productname != null" >
+        #{productname,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
