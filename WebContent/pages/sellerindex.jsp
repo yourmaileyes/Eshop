@@ -32,6 +32,7 @@
 				欢迎您&nbsp;<span class="glyphicons glyphicons-nameplate"></span>${loginUser.username }!
 			</h1>
 		</div>
+		<c:if test="${loginUser.type eq 'seller' }">
 		<div class="col-md-3 column">
 			<h1 class="text-center">
 				订单总数&nbsp;<span class="glyphicons glyphicons-nameplate"></span><b style="color: green;">${allnumber }</b>
@@ -42,6 +43,7 @@
 				未处理订单数&nbsp;<span class="glyphicons glyphicons-nameplate"></span><b style="color: red;">${notnumber}</b>
 			</h1>
 		</div>
+		</c:if>
 		<div class="col-md-3 column">
 			<h1 class="text-center">
 				钱包余额&nbsp;<span class="glyphicons glyphicons-nameplate"></span><b style="color: blue;">￥${loginUser.collect }</b>
@@ -64,6 +66,7 @@
 						</div>
 					</div>
 				</div>
+				<c:if test="${loginUser.type eq 'seller' }">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						 <a class="panel-title" data-toggle="collapse" data-parent="#panel-397253" href="#panel-element-237329">订单管理</a>
@@ -85,6 +88,22 @@
 						</div>
 					</div>
 				</div>
+				</c:if>
+				<c:if test="${loginUser.type eq 'admin' }">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						 <a class="panel-title" data-toggle="collapse" data-parent="#panel-397253" href="#panel-element-237321">用户管理</a>
+					</div>
+					<div id="panel-element-237321" class="panel-collapse in">
+						<div class="panel-body">
+							<a href="alluser.do" target="right_show">所有用户</a>
+						</div>
+						<div class="panel-body">
+							<a href="balance.jsp" target="right_show">余额充值</a>
+						</div>
+					</div>
+				</div> 
+				</c:if>
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						 <a class="panel-title" data-toggle="collapse" data-parent="#panel-397254" href="#panel-element-237321">退出系统</a>

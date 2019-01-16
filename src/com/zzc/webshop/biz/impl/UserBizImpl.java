@@ -1,5 +1,6 @@
 package com.zzc.webshop.biz.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,11 @@ public class UserBizImpl implements UserBiz{
 	public User selectByPrimaryKey(String userid) {
 		// TODO Auto-generated method stub
 		return userMapper.selectByPrimaryKey(userid);
+	}
+	@Override
+	public List<User> showuser() {
+		// TODO Auto-generated method stub
+		return userMapper.showuser();
 	}
 
 }

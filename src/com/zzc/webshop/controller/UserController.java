@@ -59,6 +59,10 @@ public class UserController {
 			session.setAttribute("products", products);
 			return "pages/sellerindex";
 		}
+		if(loginUser.getType()!=null&&loginUser.getType().equals("admin")) {
+			session.setAttribute("loginUser", loginUser);
+			return "pages/sellerindex";
+		}
 		List<Message> messages = messageBiz.selectmessage(loginUser.getUserid());
 		for(Message message:messages) {
 			if(message.getType().equals("0"))
@@ -152,5 +156,23 @@ public class UserController {
 		userBiz.updateByPrimaryKeySelective(user);
 		session.removeAttribute("loginUser");
 		return "pages/computers";
+	}
+	@RequestMapping(value="alluser")
+	public String alluser(HttpSession session) {
+		List<User> userList = userBiz.showuser();
+		session.setAttribute("userList", userList);
+		return "pages/allser";
+	}
+	@RequestMapping(value="balance")//余额充值
+	public String balance(String username,String num,HttpSession session) {
+		User user = userBiz.selectusername(username);
+		if(user==null) {
+			session.setAttribute("bmsg", "没有该用户!");
+			return "balance";
+		}
+		user.setCollect(user.getCollect()+Integer.valueOf(num));
+		userBiz.updateByPrimaryKeySelective(user);
+		session.setAttribute("bmsg", "充值成功!");
+		return "balance";
 	}
 }

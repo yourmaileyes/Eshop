@@ -14,6 +14,10 @@
   <sql id="Base_Column_List" >
     userid, username, password, type, addr, age, phone, collect
   </sql>
+  <select id="showuser" resultMap="BaseResultMap" >
+    select *
+    from user
+  </select>
   <select id="selectusername" resultMap="BaseResultMap" parameterType="Map" >
     select *
     from user
