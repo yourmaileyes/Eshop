@@ -89,6 +89,7 @@ public class UserController {
 	@RequestMapping(value = "regist")//注册
 	public String regist(User user, HttpSession session) {
 		user.setUserid(DateUtil.getId());
+		user.setCollect(0);
 		userBiz.insertSelective(user);
 		Map<String, String> paramMap = new HashMap<String, String>();
 		paramMap.put("username", user.getUsername());
