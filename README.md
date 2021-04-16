@@ -8,7 +8,8 @@ Eshop/在线购物网站
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 <br>
-由于毕业答辩关系该项目将在2018.11.25之后上传<br>
+更多项目请访问我的仓库:https://github.com/yourmaileyes?tab=repositories<br>
+承接原生开发项目<br>
 2019.1.16 V1.0更新：<br>
       1.更新了管理员和用户以及卖家的不同功能<br>
       2.管理员可以进行充值<br>
